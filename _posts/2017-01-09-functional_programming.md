@@ -1,5 +1,3 @@
-
-
 ---
 layout: post
 title: 뜨거운 감자 함수형 프로그래밍(Functional Programming)
