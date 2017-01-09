@@ -12,9 +12,9 @@ defaults:
     scope:
       path: "" # empty string for all files
     values:
-      title: SW's SW
+      title: SoftWare CHON
 
-description: SW's SW Blog
+description: SoftWare CHON
 author:
   name: SangWoo
   email: sangwoo.chon@nhnent.com
