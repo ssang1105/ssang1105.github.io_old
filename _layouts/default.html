@@ -1,23 +1,59 @@
 ---
-theme :
-  name : dbyll
+layout: compress
+# Default layout
 ---
-{% include default.html %}
 
-{% if site.google_analytics %}
-<!-- Asynchronous Google Analytics snippet -->
-<script>
-  var _gaq = _gaq || [];
-  var pluginUrl =
- '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
-  _gaq.push(['_setAccount', '{{ site.google_analytics }}']);
-  _gaq.push(['_trackPageview']);
+<!DOCTYPE html>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-{% endif %}
+{% include lang.html %}
+
+{% capture prefer_mode %}
+  {% if site.theme_mode %}
+    data-mode="{{ site.theme_mode }}"
+  {% endif %}
+{% endcapture %}
+
+<html lang="{{ site.lang }}"{{ prefer_mode }}>
+
+  {% include head.html %}
+
+  {% unless site.theme_mode %}
+    {% include mode-toggle.html %}
+  {% endunless %}
+
+  <body data-spy="scroll" data-target="#toc" data-topbar-visible="true">
+
+    {% include sidebar.html %}
+
+    {% include topbar.html %}
+
+    <div id="main-wrapper">
+      <div id="main">
+
+        {{ content }}
+
+        {% include footer.html %}
+
+      </div>
+
+      {% include search-results.html %}
+
+    </div> <!-- #main-wrapper -->
+
+    {% if page.mermaid %}
+      {% include mermaid.html %}
+    {% endif %}
+
+    <div id="mask"></div>
+
+    <a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    {% include search-loader.html %}
+
+    {% include js-selector.html %}
+
+  </body>
+
+</html>
